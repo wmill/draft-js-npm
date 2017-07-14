@@ -22,7 +22,7 @@ var isSelectionAtLeafStart = require('./isSelectionAtLeafStart');
 var nullthrows = require('fbjs/lib/nullthrows');
 
 var setImmediate;
-if (global.setImmediate) {
+if (window.setImmediate) {
   setImmediate = window.setImmediate.bind(window); // because IE IS STUPID.
 } else {
   setImmediate = require('fbjs/lib/setImmediate');
