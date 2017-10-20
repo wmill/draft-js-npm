@@ -12,12 +12,12 @@
 
 'use strict';
 
+import type DraftEditor from './DraftEditor.react';
+
 var EditorState = require('./EditorState');
 var UserAgent = require('fbjs/lib/UserAgent');
 
 var getActiveElement = require('fbjs/lib/getActiveElement');
-
-import type DraftEditor from './DraftEditor.react';
 
 var isWebKit = UserAgent.isEngine('WebKit');
 

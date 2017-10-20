@@ -24,8 +24,6 @@ var ReactDOM = require('react-dom');
 const invariant = require('fbjs/lib/invariant');
 var setDraftEditorSelection = require('./setDraftEditorSelection');
 
-var isIE11 = !!window.MSInputMethodContext && !!document.documentMode;
-
 type Props = {
   // The block that contains this leaf.
   block: ContentBlock
@@ -116,7 +114,7 @@ class DraftEditorLeaf extends React.Component {
   shouldComponentUpdate(nextProps: Props): boolean {
     const leafNode = ReactDOM.findDOMNode(this.refs.leaf);
     invariant(leafNode, 'Missing leafNode');
-    return leafNode.textContent !== nextProps.text || nextProps.styleSet !== this.props.styleSet || !isIE11 && nextProps.forceSelection;
+    return leafNode.textContent !== nextProps.text || nextProps.styleSet !== this.props.styleSet || nextProps.forceSelection;
   }
 
   componentDidUpdate(): void {

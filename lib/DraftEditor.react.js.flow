@@ -15,8 +15,8 @@
 'use strict';
 
 import type { BlockMap } from './BlockMap';
-import type { DraftEditorDefaultProps, DraftEditorProps } from './DraftEditorProps';
 import type { DraftEditorModes } from './DraftEditorModes';
+import type { DraftEditorDefaultProps, DraftEditorProps } from './DraftEditorProps';
 import type { DraftScrollPosition } from './DraftScrollPosition';
 
 const DefaultDraftBlockRenderMap = require('./DefaultDraftBlockRenderMap');
@@ -26,7 +26,6 @@ const DraftEditorContents = require('./DraftEditorContents.react');
 const DraftEditorDragHandler = require('./DraftEditorDragHandler');
 const DraftEditorEditHandler = require('./DraftEditorEditHandler');
 const DraftEditorPlaceholder = require('./DraftEditorPlaceholder.react');
-
 const EditorState = require('./EditorState');
 const React = require('react');
 const ReactDOM = require('react-dom');
@@ -38,7 +37,6 @@ const cx = require('fbjs/lib/cx');
 const emptyFunction = require('fbjs/lib/emptyFunction');
 const generateRandomKey = require('./generateRandomKey');
 const getDefaultKeyBinding = require('./getDefaultKeyBinding');
-
 const getScrollPosition = require('fbjs/lib/getScrollPosition');
 const invariant = require('fbjs/lib/invariant');
 const nullthrows = require('fbjs/lib/nullthrows');
@@ -90,6 +88,7 @@ class DraftEditor extends React.Component {
   _editorKey: string;
   _placeholderAccessibilityID: string;
   _latestEditorState: EditorState;
+  _latestCommittedEditorState: EditorState;
   _pendingStateFromBeforeInput: void | EditorState;
 
   /**
@@ -138,6 +137,7 @@ class DraftEditor extends React.Component {
     this._editorKey = props.editorKey || generateRandomKey();
     this._placeholderAccessibilityID = 'placeholder-' + this._editorKey;
     this._latestEditorState = props.editorState;
+    this._latestCommittedEditorState = props.editorState;
 
     this._onBeforeInput = this._buildHandler('onBeforeInput');
     this._onBlur = this._buildHandler('onBlur');
@@ -263,6 +263,7 @@ class DraftEditor extends React.Component {
 
   componentDidUpdate(): void {
     this._blockSelectEvents = false;
+    this._latestCommittedEditorState = this.props.editorState;
   }
 
   /**
