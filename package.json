@@ -35,8 +35,8 @@
     "object-assign": "^4.1.0"
   },
   "peerDependencies": {
-    "react": "^0.16.0 || ^15.0.0",
-    "react-dom": "^0.16.0 || ^15.0.0"
+    "react": "^16.0.0 || ^15.0.0",
+    "react-dom": "^16.0.0 || ^15.0.0"
   },
   "devDependencies": {
     "babel-core": "^6.8.0",
